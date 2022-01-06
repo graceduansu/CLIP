@@ -6,6 +6,12 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
+class MyDataParallel(torch.nn.DataParallel):
+    def __getattr__(self, name):
+        try:
+            return super().__getattr__(name)
+        except AttributeError:
+            return getattr(self.module, name)
 
 class Bottleneck(nn.Module):
     expansion = 4
@@ -66,7 +72,12 @@ class AttentionPool2d(nn.Module):
     def forward(self, x):
         x = x.reshape(x.shape[0], x.shape[1], x.shape[2] * x.shape[3]).permute(2, 0, 1)  # NCHW -> (HW)NC
         x = torch.cat([x.mean(dim=0, keepdim=True), x], dim=0)  # (HW+1)NC
-        x = x + self.positional_embedding[:, None, :].to(x.dtype)  # (HW+1)NC
+        # x = x + self.positional_embedding[:, None, :].to(x.dtype)  # (HW+1)NC
+        temp = self.positional_embedding[:, None, :].to(x.dtype)
+        temp = temp.permute(2,1,0)
+        temp = F.interpolate(temp, size=x.shape[0], mode='linear').permute(2,1,0)
+
+        x = x + temp
         x, _ = F.multi_head_attention_forward(
             query=x, key=x, value=x,
             embed_dim_to_check=x.shape[-1],
@@ -87,7 +98,7 @@ class AttentionPool2d(nn.Module):
             need_weights=False
         )
 
-        return x[0]
+        return x
 
 
 class ModifiedResNet(nn.Module):
@@ -135,6 +146,7 @@ class ModifiedResNet(nn.Module):
     def forward(self, x):
         def stem(x):
             for conv, bn in [(self.conv1, self.bn1), (self.conv2, self.bn2), (self.conv3, self.bn3)]:
+                x = x.cuda()
                 x = self.relu(bn(conv(x)))
             x = self.avgpool(x)
             return x
@@ -146,6 +158,7 @@ class ModifiedResNet(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
         x = self.attnpool(x)
+        print('output size: ', x.size())
 
         return x
 
@@ -334,9 +347,11 @@ class CLIP(nn.Module):
         return self.visual.conv1.weight.dtype
 
     def encode_image(self, image):
+        self = MyDataParallel(self, device_ids=[0,1,2,3])
         return self.visual(image.type(self.dtype))
 
     def encode_text(self, text):
+        self = MyDataParallel(self, device_ids=[0,1,2,3])
         x = self.token_embedding(text).type(self.dtype)  # [batch_size, n_ctx, d_model]
 
         x = x + self.positional_embedding.type(self.dtype)
