@@ -533,7 +533,7 @@ print(cls_list)
 len(cls_list)
 print(bad_class_count)
 
-N = 100
+N = 50
 bb_list = bb_list[:N]
 cls_list = cls_list[:N]
 img_list = img_list[:N]
@@ -615,7 +615,7 @@ mod_iou_list = torch.tensor(mod_iou_list)
 mod_avg = torch.mean(mod_iou_list)
 print(mod_avg)
 
-
+""""
 plt.figure(figsize=(16, 5))
 for i in range(10):
 
@@ -633,5 +633,5 @@ for i in range(10):
         for j in range(len(pred_bboxes[i])):
             draw.rectangle(pred_bboxes[i][j].squeeze(0).tolist(), outline='red', width=2)
         im.show()
-
+"""
 # VIDSITU TEST
