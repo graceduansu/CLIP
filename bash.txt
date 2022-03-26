@@ -1,0 +1,238 @@
+CUDA_VISIBLE_DEVICES=1 python test_clip_bbox.py
+
+(clip_edited) grace@melon:/dvmm-filer2/users/grace/CLIP$ CUDA_VISIBLE_DEVICES=2 python test_clip_bbox.py 
+Torch version: 1.7.1+cu101
+cuda
+Model parameters: 102,007,137
+Input resolution: (720, 1280)
+Context length: 77
+Vocab size: 49408
+Model's state_dict:
+check model cuda: False
+device count: 1
+--2022-02-17 17:29:50--  https://openaipublic.azureedge.net/clip/bpe_simple_vocab_16e6.txt.gz
+Resolving openaipublic.azureedge.net (openaipublic.azureedge.net)... 13.107.246.40, 13.107.213.40
+Connecting to openaipublic.azureedge.net (openaipublic.azureedge.net)|13.107.246.40|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1356917 (1.3M) [application/octet-stream]
+Saving to: ‘bpe_simple_vocab_16e6.txt.gz’
+
+bpe_simple_vocab_16e6.txt.gz                              100%[====================================================================================================================================>]   1.29M  8.48MB/s    in 0.2s    
+
+2022-02-17 17:29:51 (8.48 MB/s) - ‘bpe_simple_vocab_16e6.txt.gz’ saved [1356917/1356917]
+
+0.18.1
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_3j2d27w3x5Q_segment_00/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_aw4ehW-wTKA_segment_01/8.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Tzm6TEManmQ_segment_02/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_hSSHf_c1q5I_segment_00/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_xAoQ6JisbhI_segment_00/8.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Gfsk28SzgXk_segment_00/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Y-lL9JiLhz0_segment_00/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_9PY28-zQhm4_segment_01/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Dzj5X11anrk_segment_02/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_9nndNUHadcg_segment_01/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_zAr9k1-umvY_segment_00/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_UodvUEkuVig_segment_01/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_2ooY3GqZieg_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Qu-Y2u1Xn_U_segment_02/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_iUMDlxU14bM_segment_00/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Zo7oziWT-7o_segment_00/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_otWTm1_aAqI_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_SFfB6qvT5FI_segment_01/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_g-rw2Kyh9xo_segment_00/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Qo3riKtRg2c_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_VrNHEv6aR38_segment_01/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_jVC3DZdphYM_segment_02/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_fU4EgYmISro_segment_02/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_T69Cadlc62E_segment_02/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_85RJm2qymRY_segment_00/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_ZJGXWbt6cbU_segment_00/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_l4C-l6XeNRc_segment_09/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Zr8cz8QrBp4_segment_02/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_V4U5SaPDL0E_segment_00/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_dL-ybVv7Sgs_segment_02/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_4Q5YJKHa5W0_segment_00/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_LCe0toF3058_segment_03/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_4fEMDQnD4Xg_segment_02/8.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_fCLnOf-YjEI_segment_05/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_SFfB6qvT5FI_segment_02/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_eXMF6Skt2To_segment_06/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_S8RXX1uOGgQ_segment_03/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_jF33TElZc_Y_segment_01/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_fG7iLOObw30_segment_02/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_LV0nevBELso_segment_03/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_QgjNH6sAziM_segment_01/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_RpyIg_j4I3E_segment_04/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Sjx7K9Ybx9Q_segment_00/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_pi6sBUrSNGk_segment_05/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_lkC_md7KKq0_segment_01/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_42XFIWVIWpw_segment_05/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_FBUtGL5_tto_segment_03/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_8wB0BOjuyes_segment_03/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_37gHYr2uDZo_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_vvvjTjsXbzE_segment_03/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_z7zj8stU-kw_segment_00/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_eTVzSwuCfd8_segment_00/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_l2drIA62T8w_segment_02/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_fd7VuzALBCM_segment_02/1.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_oyLTgy93soQ_segment_01/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_eCXiGAChev4_segment_00/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_64UBH371Jj8_segment_00/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_eXMF6Skt2To_segment_02/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_c6nEk5N4fSU_segment_01/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_unI7FhokvbM_segment_03/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_ubVPP8BVcfs_segment_02/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_50nJ8UkOGwg_segment_02/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_qH3HnhEaeok_segment_00/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_5ssP_EapV9Q_segment_02/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Ez7s36AwgLk_segment_03/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_ADUmfTuiDH8_segment_00/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_DJE9nX2qKYs_segment_01/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Ktun1-2Y540_segment_02/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_SGiMk9KdOQw_segment_00/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_mdu7eHlbDwc_segment_02/9.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_6Z4Qg_fNo0Q_segment_01/8.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Qu3_80O0j5w_segment_01/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_jeaaS1NK_d4_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_zmmiX3_TJ84_segment_02/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_UuLBAMSmwgc_segment_02/7.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_P6cR-26pTSY_segment_01/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_1PQiq8zajCE_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_uF9othvTXn8_segment_03/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_4mlA78hn4mY_segment_02/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_AH4v5vqsUlc_segment_00/8.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_CuZpm0Il6YM_segment_01/6.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_oVPFTkC4-Lc_segment_02/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_at8e-jBBU5E_segment_00/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_dWJIJM3qmyQ_segment_01/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_TMGG5x-UQ2s_segment_01/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_ZY8UyWtoMWg_segment_00/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_fwwo0GsYB7c_segment_01/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_eSpPY2yMg70_segment_00/5.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_j8i-9T0UeRQ_segment_01/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_Ny49eEt1OJg_segment_03/0.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_DfFqlrv7F2g_segment_03/3.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_yINX46xPRf0_segment_02/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_yG4C_s7ItA4_segment_03/4.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_8_jbsmj5Z9w_segment_02/2.jpg'
+[Errno 2] No such file or directory: '/dvmm-filer2/users/shyam/video-event-extraction/data/train/v_TRXLUcm2CuQ_segment_00/6.jpg'
+dataloading complete: 37.90291142463684 seconds
+['people', 'dog', 'people', 'people', 'woman', 'woman', 'she she', 'she', 'dog', 'dog', 'athlete', 'athlete', 'man', 'man', 'man', 'man', 'he he he', 'he he he', 'he he he', 'he', 'he', 'man', 'man', 'he', 'reporter', 'reporter', 'man', 'man', 'man', 'man', 'man', 'man', 'shirt', 'shirt', 'uniform', 'people they', 'man', 'woman', 'woman', 'people', 'people', 'lady', 'lady', 'shirt', 'suit', 'woman she', 'woman she', 'man', 'man', 'he', 'people they', 'people they', 'man', 'woman', 'he', 'they they', 'they they', 'gymnast she', 'gymnast she', 'man', 'man', 'man', 'shirt', 'car', 'worker', 'man', 'man', 'man', 'man', 'man he', 'man he', 'cookie', 'cookie', 'cookie', 'cookie', 'he', 'he', 'he', 'person', 'person', 'kid', 'kid', 'skateboard', 'skateboard', 'people', 'people', 'people', 'people', 'people', 'people', 'shirt', 'shirt', 'shirt', 'horse they', 'horse they', 'horse they', 'horse they', 'horse', 'horse', 'people', 'sweater', 'man he', 'bike', 'bike', 'she she she', 'shot people', 'shot people', 'shot people', 'shot people', 'he', 'he', 'he', 'knife', 'man', 'man', 'man', 'boy he', 'boy he', 'they', 'they', 'they', 'they', 'they', 'they', 'they', 'they', 'they', 'athlete', 'athlete', 'she', 'she', 'she', 'runner', 'runner', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'athlete', 'kid', 'he', 'boy', 'boy', 'ball', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'clip people', 'man', 'man', 'girl', 'girl', 'girl she', 'people', 'girl she', 'athlete', 'athlete', 'mountain', 'people', 'people', 'lady', 'woman', 'woman', 'woman', 'woman', 'wrestler he he he', 'audience', 'boy', 'boy', 'boy', 'he', 'he', 'girl', 'girl', 'opponent', 'ball ball', 'ball ball', 'man', 'man', 'man', 'man he he', 'they', 'they', 'man', 'man', 'man he', 'people', 'people', 'people', 'people', 'people', 'people', 'people people', 'person', 'man', 'he', 'he', 'man', 'people', 'people', 'hair', 'nail', 'grass', 'he he', 'he he', 'man he', 'man he', 'horse horse', 'nail', 'nail', 'person', 'person', 'vegetable', 'vegetable', 'man he he', 'they they they they', 'man', 'man', 'woman', 'man', 'people', 'people', 'woman', 'woman', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'spectator', 'girl she', 'fire tool', 'fire tool', 'pants', 'they', 'they', 'they', 'woman', 'woman', 'she', 'she', 'cheerleader', 'cheerleader', 'they they', 'man he', 'man he', 'woman', 'woman', 'woman', 'man he', 'man he', 'man', 'man', 'they they part they', 'they they part they', 'video', 'video', 'video', 'video', 'video', 'video', 'man', 'she', 'she', 'bar', 'he', 'he', 'man he', 'man he', 'person', 'person', 'they hand', 'they hand', 'she she', 'she she', 'cheerleader', 'cheerleader', 'gymnast', 'boy he', 'girl', 'girl', 'he', 'he', 'he he', 'ski', 'he', 'he', 'man', 'man', 'gun', 'hat', 'he he', 'he he', 'it', 'it', 'lady she she', 'lady she she', 'lady she she', 'girl', 'girl', 'girl', 'man', 'he he he', 'he he he', 'individual', 'people', 'people', 'people', 'people', 'people', 'people', 'boy', 'boy', 'boy', 'she she', 'she she', 'man', 'man', 'man', 'boy', 'she', 'she', 'she', 'child she', 'man', 'man', 'he', 'he', 'man', 'man', 'he himself he', 'he himself he', 'saxophone', 'boy', 'face', 'ingredient', 'counter', 'counter', 'counter', 'man he', 'man he', 'person', 'man', 'tube', 'he he', 'shirt', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man body they', 'man', 'glass', 'woman', 'woman', 'she she', 'she she', 'someone', 'someone', 'they', 'they', 'woman', 'woman', 'woman', 'he he', 'he he', 'she she', 'she she', 'shirt', 'shirt', 'he', 'he', 'girl she', 'girl she', 'woman she', 'woman she', 'man', 'man', 'man', 'man', 'man', 'lady she', 'lady she', 'he he', 'he he', 'he he', 'roof roof', 'they they', 'they they', 'people', 'people', 'people', 'people', 'she she', 'instructor he', 'instructor he', 'person', 'person', 'kid', 'kid', 'kid', 'kid', 'ingredient', 'arrow', 'arrow', 'rag', 'they', 'they', 'woman', 'woman', 'he', 'he', 'person', 'man', 'man', 'people', 'people', 'man', 'man', 'man', 'nail', 'man', 'man', 'lady she', 'lady she', 'she she', 'she she', 'man he', 'man he', 'jacket', 'jacket', 'jacket', 'man', 'man', 'person', 'person', 'woman', 'woman', 'woman', 'woman', 'person they', 'person they', 'rock', 'rock', 'he', 'she', 'woman', 'woman', 'she', 'she', 'people', 'people', 'woman', 'woman', 'bicycle', 'person', 'woman', 'woman', 'woman', 'woman', 'machine', 'machine', 'bow', 'bow', 'she', 'tile', 'man', 'man', 'man', 'cookie', 'screen', 'screen', 'man he he', 'man he he', 'track', 'arrow', 'arrow', 'screen', 'screen', 'screen', 'screen', 'screen', 'screen', 'door', 'people', 'people', 'boat', 'boat', 'people', 'people', 'people', 'people', 'he', 'person', 'boat', 'boat', 'man', 'man', 'man team', 'stadium', 'man', 'individual', 'individual', 'individual', 'individual', 'he', 'he', 'teens', 'teens', 'woman', 'hand', 'hand', 'he', 'he', 'rock', 'lady', 'lady', 'man', 'people', 'people', 'lady', 'lady', 'lady', 'lady', 'he', 'he', 'man', 'wheel', 'man', 'man', 'he he', 'he', 'he', 'he himself', 'he himself', 'dancer', 'dancer', 'person', 'boy', 'boy', 'girl', 'they they they', 'man', 'man', 'girl', 'girl', 'man', 'man', 'he he he', 'he he he', 'woman', 'woman', 'woman', 'woman', 'dog', 'dog', 'man', 'man', 'man', 'man', 'bull', 'bull', 'uniform', 'they', 'they', 'they', 'they', 'they', 'they', 'they', 'man', 'man', 'kid', 'kid', 'kid', 'kid', 'kid', 'kid', 'kid', 'kid', 'man man', 'child', 'child', 'people they', 'people they', 'lady she she', 'lady she she', 'she', 'she', 'man', 'man', 'man', 'man', 'shoe', 'he', 'he', 'person', 'man he', 'man he', 'woman', 'table', 'table', 'man he', 'man he', 'woman she', 'woman she', 'woman she', 'woman she', 'woman she', 'he', 'he', 'he', 'he', 'they', 'they', 'they', 'brush', 'he he', 'he he', 'man he he he', 'man he he he', 'man he he he', 'he', 'man', 'man', 'person', 'person', 'she she', 'man', 'man', 'man', 'man', 'car car', 'they', 'he', 'he', 'woman', 'woman', 'he he', 'boy', 'man', 'man', 'child he', 'child he', 'kid', 'kid', 'kid', 'kid', 'kid', 'kid', 'woman', 'people man', 'lady', 'hair', 'person', 'person', 'shovel', 'water', 'shoe', 'man', 'man', 'woman', 'woman', 'counter', 'counter', 'person', 'person', 'grass flower', 'house', 'house', 'car', 'car', 'person', 'person', 'man', 'man', 'man', 'reporter', 'reporter', 'man', 'man', 'girl', 'girl', 'man', 'man', 'people', 'people', 'people', 'people', 'person', 'man', 'man', 'man', 'man he he', 'man he he', 'man he he', 'girl they', 'girl they', 'light', 'woman', 'woman', 'it', 'she she', 'she she', 'she she she she she', 'she she she she she', 'he', 'he', 'man', 'man', 'man', 'man', 'boat', 'they', 'person person they', 'man', 'woman she', 'woman she', 'boy leg hair leg', 'boy leg hair leg', 'man he', 'man he', 'person', 'person', 'man', 'man', 'man']
+0
+torch.Size([50, 3, 720, 1280])
+torch.Size([50, 77])
+/dvmm-filer2/users/grace/anaconda3/envs/clip_edited/lib/python3.8/site-packages/torch/nn/functional.py:3060: UserWarning: Default upsampling behavior when mode=linear is changed to align_corners=False since 0.4.0. Please specify align_corners=True if the old behavior is desired. See the documentation of nn.Upsample for details.
+  warnings.warn("Default upsampling behavior when mode={} is changed "
+output size:  torch.Size([881, 50, 1024])
+inference complete: 2.0127577781677246 seconds
+torch.Size([880, 50, 1024])
+50
+torch.Size([22, 40, 50, 1024])
+torch.Size([50, 1024])
+0.16755691
+0.1952784
+0.15754856
+0.15754856
+0.16950674
+0.16950674
+0.16596971
+0.16683784
+0.19890009
+0.19890009
+0.19631134
+0.19631134
+0.1830745
+0.1830745
+0.1830745
+0.1830745
+0.16156779
+0.1615678
+0.1615678
+0.18769899
+0.18769899
+0.13383865
+0.13383865
+0.15612724
+0.16489962
+0.16489962
+0.1782485
+0.1782485
+0.15917459
+0.15917459
+0.17553641
+0.17553641
+0.12659164
+0.12659164
+0.14102218
+0.16379586
+0.17925212
+0.15896265
+0.15896265
+0.1547781
+0.1709354
+0.15264162
+0.15264164
+0.15426499
+0.14771649
+0.1921933
+0.19219328
+0.17842184
+0.17842184
+0.17400257
+[{'score': 0.87514997, 'bbox': (1073, 137, 1279, 375), 'bbox_normalized': array([0.83828125, 0.19027778, 0.99921875, 0.52083333])}, {'score': 0.8660482, 'bbox': (0, 20, 645, 719), 'bbox_normalized': array([0.        , 0.02777778, 0.50390625, 0.99861111])}]
+[{'score': 0.9856707, 'bbox': (195, 403, 285, 523), 'bbox_normalized': array([0.15234375, 0.55972222, 0.22265625, 0.72638889])}, {'score': 0.72755116, 'bbox': (1203, 643, 1262, 719), 'bbox_normalized': array([0.93984375, 0.89305556, 0.9859375 , 0.99861111])}, {'score': 0.6675308, 'bbox': (390, 357, 743, 678), 'bbox_normalized': array([0.3046875 , 0.49583333, 0.58046875, 0.94166667])}]
+[{'score': 0.9917477, 'bbox': (33, 555, 380, 658), 'bbox_normalized': array([0.02578125, 0.77083333, 0.296875  , 0.91388889])}, {'score': 0.9225955, 'bbox': (938, 215, 1204, 517), 'bbox_normalized': array([0.7328125 , 0.29861111, 0.940625  , 0.71805556])}, {'score': 0.8261665, 'bbox': (632, 192, 750, 431), 'bbox_normalized': array([0.49375   , 0.26666667, 0.5859375 , 0.59861111])}]
+[{'score': 0.9917477, 'bbox': (33, 555, 380, 658), 'bbox_normalized': array([0.02578125, 0.77083333, 0.296875  , 0.91388889])}, {'score': 0.9225955, 'bbox': (938, 215, 1204, 517), 'bbox_normalized': array([0.7328125 , 0.29861111, 0.940625  , 0.71805556])}, {'score': 0.8261665, 'bbox': (632, 192, 750, 431), 'bbox_normalized': array([0.49375   , 0.26666667, 0.5859375 , 0.59861111])}]
+[{'score': 0.99203503, 'bbox': (520, 0, 681, 161), 'bbox_normalized': array([0.40625   , 0.        , 0.53203125, 0.22361111])}, {'score': 0.8254257, 'bbox': (29, 249, 200, 413), 'bbox_normalized': array([0.02265625, 0.34583333, 0.15625   , 0.57361111])}, {'score': 0.78134775, 'bbox': (768, 21, 1025, 491), 'bbox_normalized': array([0.6       , 0.02916667, 0.80078125, 0.68194444])}]
+[{'score': 0.99203503, 'bbox': (520, 0, 681, 161), 'bbox_normalized': array([0.40625   , 0.        , 0.53203125, 0.22361111])}, {'score': 0.8254257, 'bbox': (29, 249, 200, 413), 'bbox_normalized': array([0.02265625, 0.34583333, 0.15625   , 0.57361111])}, {'score': 0.78134775, 'bbox': (768, 21, 1025, 491), 'bbox_normalized': array([0.6       , 0.02916667, 0.80078125, 0.68194444])}]
+[{'score': 0.8845261, 'bbox': (0, 22, 489, 719), 'bbox_normalized': array([0.        , 0.03055556, 0.38203125, 0.99861111])}]
+[{'score': 0.9875353, 'bbox': (981, 86, 1038, 175), 'bbox_normalized': array([0.76640625, 0.11944444, 0.8109375 , 0.24305556])}, {'score': 0.9488556, 'bbox': (620, 581, 686, 675), 'bbox_normalized': array([0.484375  , 0.80694444, 0.5359375 , 0.9375    ])}, {'score': 0.6664682, 'bbox': (1153, 302, 1257, 374), 'bbox_normalized': array([0.90078125, 0.41944444, 0.98203125, 0.51944444])}]
+[{'score': 0.9935862, 'bbox': (308, 545, 424, 601), 'bbox_normalized': array([0.240625  , 0.75694444, 0.33125   , 0.83472222])}]
+[{'score': 0.9935862, 'bbox': (308, 545, 424, 601), 'bbox_normalized': array([0.240625  , 0.75694444, 0.33125   , 0.83472222])}]
+[{'score': 0.8179793, 'bbox': (214, 526, 885, 719), 'bbox_normalized': array([0.1671875 , 0.73055556, 0.69140625, 0.99861111])}, {'score': 0.7313754, 'bbox': (593, 102, 840, 543), 'bbox_normalized': array([0.46328125, 0.14166667, 0.65625   , 0.75416667])}]
+[{'score': 0.8179793, 'bbox': (214, 526, 885, 719), 'bbox_normalized': array([0.1671875 , 0.73055556, 0.69140625, 0.99861111])}, {'score': 0.7313754, 'bbox': (593, 102, 840, 543), 'bbox_normalized': array([0.46328125, 0.14166667, 0.65625   , 0.75416667])}]
+[{'score': 0.9910797, 'bbox': (466, 250, 549, 379), 'bbox_normalized': array([0.3640625 , 0.34722222, 0.42890625, 0.52638889])}, {'score': 0.776672, 'bbox': (1044, 154, 1161, 379), 'bbox_normalized': array([0.815625  , 0.21388889, 0.90703125, 0.52638889])}, {'score': 0.7551164, 'bbox': (760, 168, 881, 373), 'bbox_normalized': array([0.59375   , 0.23333333, 0.68828125, 0.51805556])}]
+[{'score': 0.9910797, 'bbox': (466, 250, 549, 379), 'bbox_normalized': array([0.3640625 , 0.34722222, 0.42890625, 0.52638889])}, {'score': 0.77667207, 'bbox': (1044, 154, 1161, 379), 'bbox_normalized': array([0.815625  , 0.21388889, 0.90703125, 0.52638889])}, {'score': 0.7551164, 'bbox': (760, 168, 881, 373), 'bbox_normalized': array([0.59375   , 0.23333333, 0.68828125, 0.51805556])}]
+[{'score': 0.9910797, 'bbox': (466, 250, 549, 379), 'bbox_normalized': array([0.3640625 , 0.34722222, 0.42890625, 0.52638889])}, {'score': 0.77667207, 'bbox': (1044, 154, 1161, 379), 'bbox_normalized': array([0.815625  , 0.21388889, 0.90703125, 0.52638889])}, {'score': 0.7551164, 'bbox': (760, 168, 881, 373), 'bbox_normalized': array([0.59375   , 0.23333333, 0.68828125, 0.51805556])}]
+[{'score': 0.9910797, 'bbox': (466, 250, 549, 379), 'bbox_normalized': array([0.3640625 , 0.34722222, 0.42890625, 0.52638889])}, {'score': 0.77667207, 'bbox': (1044, 154, 1161, 379), 'bbox_normalized': array([0.815625  , 0.21388889, 0.90703125, 0.52638889])}, {'score': 0.7551164, 'bbox': (760, 168, 881, 373), 'bbox_normalized': array([0.59375   , 0.23333333, 0.68828125, 0.51805556])}]
+[{'score': 0.99891925, 'bbox': (405, 27, 635, 230), 'bbox_normalized': array([0.31640625, 0.0375    , 0.49609375, 0.31944444])}, {'score': 0.95621556, 'bbox': (567, 248, 741, 482), 'bbox_normalized': array([0.44296875, 0.34444444, 0.57890625, 0.66944444])}, {'score': 0.827334, 'bbox': (526, 479, 1279, 719), 'bbox_normalized': array([0.4109375 , 0.66527778, 0.99921875, 0.99861111])}]
+[{'score': 0.99891925, 'bbox': (405, 27, 635, 230), 'bbox_normalized': array([0.31640625, 0.0375    , 0.49609375, 0.31944444])}, {'score': 0.95621556, 'bbox': (567, 248, 741, 482), 'bbox_normalized': array([0.44296875, 0.34444444, 0.57890625, 0.66944444])}, {'score': 0.8273339, 'bbox': (526, 479, 1279, 719), 'bbox_normalized': array([0.4109375 , 0.66527778, 0.99921875, 0.99861111])}]
+[{'score': 0.99891925, 'bbox': (405, 27, 635, 230), 'bbox_normalized': array([0.31640625, 0.0375    , 0.49609375, 0.31944444])}, {'score': 0.95621556, 'bbox': (567, 248, 741, 482), 'bbox_normalized': array([0.44296875, 0.34444444, 0.57890625, 0.66944444])}, {'score': 0.8273339, 'bbox': (526, 479, 1279, 719), 'bbox_normalized': array([0.4109375 , 0.66527778, 0.99921875, 0.99861111])}]
+[{'score': 0.97674227, 'bbox': (990, 425, 1185, 640), 'bbox_normalized': array([0.7734375 , 0.59027778, 0.92578125, 0.88888889])}, {'score': 0.7227536, 'bbox': (510, 0, 907, 511), 'bbox_normalized': array([0.3984375 , 0.        , 0.70859375, 0.70972222])}]
+[{'score': 0.97674227, 'bbox': (990, 425, 1185, 640), 'bbox_normalized': array([0.7734375 , 0.59027778, 0.92578125, 0.88888889])}, {'score': 0.7227536, 'bbox': (510, 0, 907, 511), 'bbox_normalized': array([0.3984375 , 0.        , 0.70859375, 0.70972222])}]
+[{'score': 0.982132, 'bbox': (697, 189, 876, 375), 'bbox_normalized': array([0.54453125, 0.2625    , 0.684375  , 0.52083333])}, {'score': 0.9420795, 'bbox': (0, 67, 680, 401), 'bbox_normalized': array([0.        , 0.09305556, 0.53125   , 0.55694444])}]
+[{'score': 0.982132, 'bbox': (697, 189, 876, 375), 'bbox_normalized': array([0.54453125, 0.2625    , 0.684375  , 0.52083333])}, {'score': 0.9420795, 'bbox': (0, 67, 680, 401), 'bbox_normalized': array([0.        , 0.09305556, 0.53125   , 0.55694444])}]
+[{'score': 0.69621795, 'bbox': (0, 0, 1279, 719), 'bbox_normalized': array([0.        , 0.        , 0.99921875, 0.99861111])}]
+[{'score': 0.99087304, 'bbox': (673, 165, 862, 422), 'bbox_normalized': array([0.52578125, 0.22916667, 0.6734375 , 0.58611111])}, {'score': 0.8571768, 'bbox': (126, 125, 320, 332), 'bbox_normalized': array([0.0984375 , 0.17361111, 0.25      , 0.46111111])}, {'score': 0.79671174, 'bbox': (576, 454, 814, 690), 'bbox_normalized': array([0.45      , 0.63055556, 0.6359375 , 0.95833333])}]
+[{'score': 0.99087304, 'bbox': (673, 165, 862, 422), 'bbox_normalized': array([0.52578125, 0.22916667, 0.6734375 , 0.58611111])}, {'score': 0.8571768, 'bbox': (126, 125, 320, 332), 'bbox_normalized': array([0.0984375 , 0.17361111, 0.25      , 0.46111111])}, {'score': 0.79671174, 'bbox': (576, 454, 814, 690), 'bbox_normalized': array([0.45      , 0.63055556, 0.6359375 , 0.95833333])}]
+[{'score': 0.9431903, 'bbox': (1106, 642, 1260, 702), 'bbox_normalized': array([0.8640625 , 0.89166667, 0.984375  , 0.975     ])}, {'score': 0.8575485, 'bbox': (304, 76, 1004, 532), 'bbox_normalized': array([0.2375    , 0.10555556, 0.784375  , 0.73888889])}]
+[{'score': 0.9431903, 'bbox': (1106, 642, 1260, 702), 'bbox_normalized': array([0.8640625 , 0.89166667, 0.984375  , 0.975     ])}, {'score': 0.8575485, 'bbox': (304, 76, 1004, 532), 'bbox_normalized': array([0.2375    , 0.10555556, 0.784375  , 0.73888889])}]
+[{'score': 0.6770558, 'bbox': (379, 0, 892, 675), 'bbox_normalized': array([0.29609375, 0.        , 0.696875  , 0.9375    ])}]
+[{'score': 0.6770558, 'bbox': (379, 0, 892, 675), 'bbox_normalized': array([0.29609375, 0.        , 0.696875  , 0.9375    ])}]
+[{'score': 0.9930543, 'bbox': (770, 50, 889, 162), 'bbox_normalized': array([0.6015625 , 0.06944444, 0.69453125, 0.225     ])}, {'score': 0.8708718, 'bbox': (369, 185, 600, 612), 'bbox_normalized': array([0.28828125, 0.25694444, 0.46875   , 0.85      ])}, {'score': 0.8566239, 'bbox': (29, 45, 374, 434), 'bbox_normalized': array([0.02265625, 0.0625    , 0.2921875 , 0.60277778])}]
+[{'score': 0.9930543, 'bbox': (770, 50, 889, 162), 'bbox_normalized': array([0.6015625 , 0.06944444, 0.69453125, 0.225     ])}, {'score': 0.8708718, 'bbox': (369, 185, 600, 612), 'bbox_normalized': array([0.28828125, 0.25694444, 0.46875   , 0.85      ])}, {'score': 0.8566239, 'bbox': (29, 45, 374, 434), 'bbox_normalized': array([0.02265625, 0.0625    , 0.2921875 , 0.60277778])}]
+[{'score': 0.99579144, 'bbox': (706, 21, 1058, 438), 'bbox_normalized': array([0.5515625 , 0.02916667, 0.8265625 , 0.60833333])}]
+[{'score': 0.99579144, 'bbox': (706, 21, 1058, 438), 'bbox_normalized': array([0.5515625 , 0.02916667, 0.8265625 , 0.60833333])}]
+[{'score': 0.64819735, 'bbox': (0, 0, 1279, 719), 'bbox_normalized': array([0.        , 0.        , 0.99921875, 0.99861111])}]
+[{'score': 0.8423722, 'bbox': (0, 0, 1279, 697), 'bbox_normalized': array([0.        , 0.        , 0.99921875, 0.96805556])}]
+[{'score': 0.8371752, 'bbox': (125, 0, 1194, 719), 'bbox_normalized': array([0.09765625, 0.        , 0.9328125 , 0.99861111])}]
+[{'score': 0.9893739, 'bbox': (320, 0, 838, 527), 'bbox_normalized': array([0.25      , 0.        , 0.6546875 , 0.73194444])}, {'score': 0.9457528, 'bbox': (77, 516, 265, 629), 'bbox_normalized': array([0.06015625, 0.71666667, 0.20703125, 0.87361111])}, {'score': 0.93257713, 'bbox': (26, 23, 152, 137), 'bbox_normalized': array([0.0203125 , 0.03194444, 0.11875   , 0.19027778])}]
+[{'score': 0.9893739, 'bbox': (320, 0, 838, 527), 'bbox_normalized': array([0.25      , 0.        , 0.6546875 , 0.73194444])}, {'score': 0.9457528, 'bbox': (77, 516, 265, 629), 'bbox_normalized': array([0.06015625, 0.71666667, 0.20703125, 0.87361111])}, {'score': 0.93257713, 'bbox': (26, 23, 152, 137), 'bbox_normalized': array([0.0203125 , 0.03194444, 0.11875   , 0.19027778])}]
+[{'score': 0.63882345, 'bbox': (34, 76, 1279, 719), 'bbox_normalized': array([0.0265625 , 0.10555556, 0.99921875, 0.99861111])}]
+[{'score': 0.9887558, 'bbox': (733, 123, 846, 248), 'bbox_normalized': array([0.57265625, 0.17083333, 0.6609375 , 0.34444444])}, {'score': 0.8951526, 'bbox': (1003, 82, 1133, 229), 'bbox_normalized': array([0.78359375, 0.11388889, 0.88515625, 0.31805556])}, {'score': 0.839467, 'bbox': (199, 416, 407, 680), 'bbox_normalized': array([0.15546875, 0.57777778, 0.31796875, 0.94444444])}]
+[{'score': 0.970896, 'bbox': (1048, 252, 1098, 303), 'bbox_normalized': array([0.81875   , 0.35      , 0.8578125 , 0.42083333])}, {'score': 0.96221936, 'bbox': (480, 149, 906, 671), 'bbox_normalized': array([0.375     , 0.20694444, 0.7078125 , 0.93194444])}]
+[{'score': 0.97089607, 'bbox': (1048, 252, 1098, 303), 'bbox_normalized': array([0.81875   , 0.35      , 0.8578125 , 0.42083333])}, {'score': 0.96221936, 'bbox': (480, 149, 906, 671), 'bbox_normalized': array([0.375     , 0.20694444, 0.7078125 , 0.93194444])}]
+[{'score': 0.73241144, 'bbox': (0, 0, 1279, 719), 'bbox_normalized': array([0.        , 0.        , 0.99921875, 0.99861111])}]
+[{'score': 0.9842156, 'bbox': (298, 283, 469, 338), 'bbox_normalized': array([0.2328125 , 0.39305556, 0.36640625, 0.46944444])}, {'score': 0.9126104, 'bbox': (426, 612, 545, 664), 'bbox_normalized': array([0.3328125 , 0.85      , 0.42578125, 0.92222222])}, {'score': 0.89116913, 'bbox': (283, 110, 456, 273), 'bbox_normalized': array([0.22109375, 0.15277778, 0.35625   , 0.37916667])}]
+[{'score': 0.9862239, 'bbox': (775, 310, 908, 456), 'bbox_normalized': array([0.60546875, 0.43055556, 0.709375  , 0.63333333])}, {'score': 0.7244768, 'bbox': (1189, 105, 1279, 285), 'bbox_normalized': array([0.92890625, 0.14583333, 0.99921875, 0.39583333])}, {'score': 0.7075189, 'bbox': (144, 233, 295, 435), 'bbox_normalized': array([0.1125    , 0.32361111, 0.23046875, 0.60416667])}]
+[{'score': 0.9862239, 'bbox': (775, 310, 908, 456), 'bbox_normalized': array([0.60546875, 0.43055556, 0.709375  , 0.63333333])}, {'score': 0.72447664, 'bbox': (1189, 105, 1279, 285), 'bbox_normalized': array([0.92890625, 0.14583333, 0.99921875, 0.39583333])}, {'score': 0.70751876, 'bbox': (144, 233, 295, 435), 'bbox_normalized': array([0.1125    , 0.32361111, 0.23046875, 0.60416667])}]
+[{'score': 0.92470235, 'bbox': (378, 88, 570, 424), 'bbox_normalized': array([0.2953125 , 0.12222222, 0.4453125 , 0.58888889])}]
+[{'score': 0.92470235, 'bbox': (378, 88, 570, 424), 'bbox_normalized': array([0.2953125 , 0.12222222, 0.4453125 , 0.58888889])}]
+[{'score': 0.99637353, 'bbox': (985, 449, 1061, 505), 'bbox_normalized': array([0.76953125, 0.62361111, 0.82890625, 0.70138889])}, {'score': 0.75124055, 'bbox': (656, 184, 862, 392), 'bbox_normalized': array([0.5125    , 0.25555556, 0.6734375 , 0.54444444])}]
+50
+50
+50
+tensor(0.2614, dtype=torch.float64)
+tensor(0.5076, dtype=torch.float64)
+program complete: 44.87442207336426 seconds

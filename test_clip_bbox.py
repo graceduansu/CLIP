@@ -1,6 +1,21 @@
-import subprocess
+#!/usr/bin/env python3
+
 import numpy as np
 import torch
+
+import argparse
+import logging
+import sys
+import subprocess
+import os
+import time
+
+# Parse arguments
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("--run-name", required=True)
+parser.add_argument("--num-bboxes", required=True)
+parser.add_argument("--job-start", required=True)
+args = parser.parse_args()
 
 print("Torch version:", torch.__version__)
 
@@ -23,10 +38,12 @@ print("Model parameters:", f"{np.sum([int(np.prod(p.shape)) for p in model_old.p
 print("Input resolution:", input_resolution)
 print("Context length:", context_length)
 print("Vocab size:", vocab_size)
+
 import sys
 sys.path.append('/dvmm-filer2/users/grace/CLIP/clip')
 from model import *
 from newpad import *
+
 model_old.state_dict()['input_resolution'] = torch.tensor([720,1280])
 print("Model's state_dict:")
 for param_tensor in model_old.state_dict():
@@ -35,7 +52,7 @@ for param_tensor in model_old.state_dict():
     
 # parallelize
 model_modded = build_model(model_old.state_dict())
-model_modded = MyDataParallel(model_modded, device_ids=[0,1,2,3])
+# model_modded = MyDataParallel(model_modded, device_ids=[0,1,2,3])
 print("check model cuda: {}".format(next(model_modded.parameters()).is_cuda))
 model_modded.to(device)
 print('device count: {}'.format(torch.cuda.device_count()))
@@ -56,13 +73,12 @@ image_std = torch.tensor([0.26862954, 0.26130258, 0.27577711]).cuda()
 
 import gzip
 import html
-import os
 from functools import lru_cache
 
 import ftfy
 import regex as re
 
-os.system("wget https://openaipublic.azureedge.net/clip/bpe_simple_vocab_16e6.txt.gz -O bpe_simple_vocab_16e6.txt.gz")
+# os.system("wget https://openaipublic.azureedge.net/clip/bpe_simple_vocab_16e6.txt.gz -O bpe_simple_vocab_16e6.txt.gz")
 
 @lru_cache()
 def bytes_to_unicode():
@@ -188,10 +204,8 @@ import skimage
 import IPython.display
 import matplotlib.pyplot as plt
 from PIL import Image
-import numpy as np
 
 from collections import OrderedDict
-import torch
 
 print(skimage.__version__)
 
@@ -495,39 +509,50 @@ img_path_list = []
 img_dim_list = []
 bad_class_count = 0
 
+json_start_idx = args.job_start
+json_end_idx = json_start_idx + args.num_bboxes
+start_time = time.time()
+
 frame_dict = None
-with open("/dvmm-filer2/users/shyam/video-event-extraction/train_final_single_verbs_equal_size.json", "r") as f:
+with open("/dvmm-filer2/users/shyam/video-event-extraction/train_final_single_verbs.json", "r") as f:
     frame_dict = json.load(f)
     seg_list = list(frame_dict.keys())[:500]
     
-    # only take one bb from each seg
     for seg in seg_list:
-        #print('----------------------------------------------------------------------------')
-        #print(frame_dict[seg])        
         try:
-            verb = frame_dict[seg]['verb'][0]
-            arg = list(frame_dict[seg]['arg2vid'][verb].keys())[0]
-            box_idx = frame_dict[seg]['arg2vid'][verb][arg][0]
-            cls = frame_dict[seg]['frames'][verb][arg]
-            
-            
-            if '-' in cls:
-                bad_class_count += 1
-                continue
-             
+            verb = frame_dict[seg]['verb'][0] # assuming single verbs only
+            arg_list = list(frame_dict[seg]['arg2vid'][verb].keys())
 
-            frame_idx = frame_dict[seg]['bb2frames'][box_idx]
-            img_path = "/dvmm-filer2/users/shyam/video-event-extraction/data/train/" + seg +"/" + str(frame_idx) + ".jpg"
-            x = Image.open(img_path).convert("RGB")
-            test_image = preprocess(x)
+            for arg in arg_list:
 
-            img_path_list.append(img_path)
-            img_list.append(test_image)
-            bb_list.append(frame_dict[seg]['bb'][box_idx])
-            cls_list.append(cls)
+                arg = list(frame_dict[seg]['arg2vid'][verb].keys())[0]
+                cls = frame_dict[seg]['frames'][verb][arg]
+
+                # replace all hyphens with spaces
+                if '-' in cls:
+                    cls = cls.replace('-', ' ')
+
+                box_list = frame_dict[seg]['arg2vid'][verb][arg]
+
+                for box_idx in box_list:
+                    box_idx = frame_dict[seg]['arg2vid'][verb][arg][0]
+                
+                    frame_idx = frame_dict[seg]['bb2frames'][box_idx]
+                    img_path = "/dvmm-filer2/users/shyam/video-event-extraction/data/train/" + seg +"/" + str(frame_idx) + ".jpg"
+                    x = Image.open(img_path).convert("RGB")
+                    test_image = preprocess(x)
+
+                    img_path_list.append(img_path)
+                    img_list.append(test_image)
+                    bb_list.append(frame_dict[seg]['bb'][box_idx])
+                    cls_list.append(cls)
+                    
         except Exception as e:
-            #print(e)
+            print(e)
             continue
+
+load_time = time.time()
+print('dataloading complete: {} seconds'.format(load_time - start_time))
 
 print(cls_list)
 len(cls_list)
@@ -545,7 +570,7 @@ image_input -= image_mean[:, None, None]
 image_input /= image_std[:, None, None]
 
 tokenizer = SimpleTokenizer()
-text_tokens = [tokenizer.encode("This is a " + desc) for desc in cls_list]
+text_tokens = [tokenizer.encode(desc) for desc in cls_list]
 
 text_input = torch.zeros(len(text_tokens), model_modded.context_length, dtype=torch.long)
 sot_token = tokenizer.encoder['<|startoftext|>']
@@ -566,6 +591,9 @@ print(text_input.shape)
 with torch.no_grad():
     image_features = model_modded.encode_image(image_input).float()
     text_features = model_modded.encode_text(text_input).float()
+
+inference_time = time.time()
+print('inference complete: {} seconds'.format(inference_time - load_time))
 
 img_fts = image_features[1:]
 print(img_fts.size())
@@ -614,6 +642,10 @@ for i in range(len(bb_list)):
 mod_iou_list = torch.tensor(mod_iou_list)
 mod_avg = torch.mean(mod_iou_list)
 print(mod_avg)
+
+end_time = time.time()
+print('program complete: {} seconds'.format(end_time - start_time))
+
 
 """"
 plt.figure(figsize=(16, 5))
