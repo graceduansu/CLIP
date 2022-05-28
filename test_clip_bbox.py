@@ -13,8 +13,9 @@ import time
 # Parse arguments
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("--run-name", required=True)
-parser.add_argument("--num-bboxes", required=True)
-parser.add_argument("--job-start", required=True)
+parser.add_argument("--num-segs", required=True, type=int)
+parser.add_argument("--job-start", required=True, type=int)
+parser.add_argument("--k", required=True, type=int)
 args = parser.parse_args()
 
 print("Torch version:", torch.__version__)
@@ -209,8 +210,6 @@ from collections import OrderedDict
 
 print(skimage.__version__)
 
-
-
 # images in skimage to use and their textual descriptions
 descriptions = {
     "page": "a page of text about segmentation",
@@ -267,7 +266,7 @@ def img_fts_to_heatmap(img_fts, txt_fts):
 rel_peak_thr = .6
 rel_rel_thr = .3
 ioa_thr = .6
-topk_boxes = 3
+topk_boxes = args.k
 from skimage.feature import peak_local_max
 def heat2bbox(heat_map, original_image_shape):
     
@@ -507,145 +506,128 @@ cls_list = []
 img_list = []
 img_path_list = []
 img_dim_list = []
-bad_class_count = 0
 
 json_start_idx = args.job_start
-json_end_idx = json_start_idx + args.num_bboxes
+json_end_idx = json_start_idx + args.num_segs
 start_time = time.time()
 
-frame_dict = None
-with open("/dvmm-filer2/users/shyam/video-event-extraction/train_final_single_verbs.json", "r") as f:
-    frame_dict = json.load(f)
-    seg_list = list(frame_dict.keys())[:500]
-    
-    for seg in seg_list:
-        try:
-            verb = frame_dict[seg]['verb'][0] # assuming single verbs only
-            arg_list = list(frame_dict[seg]['arg2vid'][verb].keys())
+f = open("/dvmm-filer2/users/shyam/video-event-extraction/train_final_single_verbs.json", "r") 
+frame_dict = json.load(f)
+seg_list = list(frame_dict.keys())[json_start_idx : json_end_idx]
 
-            for arg in arg_list:
+result_dict = {}
 
-                arg = list(frame_dict[seg]['arg2vid'][verb].keys())[0]
-                cls = frame_dict[seg]['frames'][verb][arg]
+for seg in seg_list:
+    result_dict[seg] = frame_dict[seg]
+    verb = frame_dict[seg]['verb'][0] # assuming single verbs only
+    arg_list = list(frame_dict[seg]['arg2vid'][verb].keys())
 
-                # replace all hyphens with spaces
-                if '-' in cls:
-                    cls = cls.replace('-', ' ')
+    for arg in arg_list:
 
-                box_list = frame_dict[seg]['arg2vid'][verb][arg]
+        arg = list(frame_dict[seg]['arg2vid'][verb].keys())[0]
+        cls = frame_dict[seg]['frames'][verb][arg]
 
-                for box_idx in box_list:
-                    box_idx = frame_dict[seg]['arg2vid'][verb][arg][0]
-                
-                    frame_idx = frame_dict[seg]['bb2frames'][box_idx]
-                    img_path = "/dvmm-filer2/users/shyam/video-event-extraction/data/train/" + seg +"/" + str(frame_idx) + ".jpg"
-                    x = Image.open(img_path).convert("RGB")
-                    test_image = preprocess(x)
+        # replace all hyphens with spaces
+        if '-' in cls:
+            cls = cls.replace('-', ' ')
 
-                    img_path_list.append(img_path)
-                    img_list.append(test_image)
-                    bb_list.append(frame_dict[seg]['bb'][box_idx])
-                    cls_list.append(cls)
+        box_list = frame_dict[seg]['arg2vid'][verb][arg]
+
+        for box_idx in box_list:               
+            frame_idx = frame_dict[seg]['bb2frames'][box_idx]
+            img_path = "/dvmm-filer2/users/shyam/video-event-extraction/data/train/" + seg +"/" + str(frame_idx) + ".jpg"
+            
+            try:
+                x = Image.open(img_path).convert("RGB")
+            except Exception as e:
+                # if image does not exist, remove from result dict
+                # TODO: does this work on out of scope variables?
+                # Do empty arg lists need to be handled differently?
+                result_dict[seg]['arg2vid'][verb][arg].remove(box_idx)
+                result_dict[seg]['bb2frames'].remove(frame_idx)
+
+                print(e)
+                continue
+
+            test_image = preprocess(x)
+
+            img_path_list.append(img_path)
+            img_list.append(test_image)
+            bb_list.append(frame_dict[seg]['bb'][box_idx])
+            cls_list.append(cls)
+
+            # inference for bbox batch of size 1
+            image_input = torch.tensor(np.stack(img_list)).cuda()
+            image_input -= image_mean[:, None, None]
+            image_input /= image_std[:, None, None]
+
+            tokenizer = SimpleTokenizer()
+            text_tokens = [tokenizer.encode(desc) for desc in cls_list]
+
+            text_input = torch.zeros(len(text_tokens), model_modded.context_length, dtype=torch.long)
+            sot_token = tokenizer.encoder['<|startoftext|>']
+            eot_token = tokenizer.encoder['<|endoftext|>']
+
+            for i, tokens in enumerate(text_tokens):
+                tokens = [sot_token] + tokens + [eot_token]
+                text_input[i, :len(tokens)] = torch.tensor(tokens)
+
+            text_input = text_input.cuda()
+
+            with torch.no_grad():
+                image_features = model_modded.encode_image(image_input).float()
+                text_features = model_modded.encode_text(text_input).float()
+
+            # get bbox results
+            img_fts = image_features[1:]
+
+            heatmap_list = img_fts_to_heatmap(img_fts, text_features)
+            pred_bboxes = []
+            for h in range(len(heatmap_list)):
+                title = "Image " + str(h) + ", Text: \"" + cls_list[h] + "\""
+                heat = heatmap_list[h]
+                bboxes = heat2bbox(heat, input_resolution)
+                pred_bboxes.append([torch.tensor(b['bbox_normalized']).unsqueeze(0) for b in bboxes])
+                #img_heat_bbox_disp(img_list[h].permute(1, 2, 0), heat, title=title, bboxes=bboxes, order='xyxy') 
+
+            # resize pred_bboxes to gt image width and height
+            W = 720
+            H = 405
+            for i in range(len(pred_bboxes)):
+                for j in range(len(pred_bboxes[i])):
                     
-        except Exception as e:
-            print(e)
-            continue
+                    bbox_norm = pred_bboxes[i][j][0]
+                    pred_bboxes[i][j][0] = torch.tensor([int(bbox_norm[0]*W),int(bbox_norm[1]*H),int(bbox_norm[2]*W),int(bbox_norm[3]*H),])
+
+            bb_list = [torch.tensor(b).unsqueeze(0) for b in bb_list]
+
+            # Calculate IoUs
+            iou = jaccard(bb_list[0], pred_bboxes[0]).squeeze(0)
+            mod_iou = mod_jaccard(bb_list[0], pred_bboxes[0]).squeeze(0)
+
+            # Write results to dict 
+            # TODO: how to handle when len(pred_bboxes) != len(gt_bboxes) ?
+            for j in range(len(pred_bboxes[0])):
+                pred_bboxes[0][j] = pred_bboxes[0][j].squeeze(0).tolist()
+
+            result_dict[seg]['clip_pred_bbox_list'] = pred_bboxes[0]
+
+            if "clip_iou_list" not in result_dict[seg]:
+                result_dict[seg]['clip_iou_list'] = []
+            result_dict[seg]['clip_iou_list'].append(iou)
+
+            if "clip_mod_iou_list" not in result_dict[seg]:
+                result_dict[seg]['clip_mod_iou_list'] = []
+            result_dict[seg]['clip_mod_iou_list'].append(mod_iou)
+
+# write result dict to json
+out_path = "/dvmm-filer2/users/grace/CLIP/{}_k{}_{}-{}.json".format(args.run_name, args.k, args.job_start, json_end_idx)
+outfile = open(out_path, "w") 
+json_string = json.dumps(result_dict)
+outfile.write(json_string)
 
 load_time = time.time()
-print('dataloading complete: {} seconds'.format(load_time - start_time))
-
-print(cls_list)
-len(cls_list)
-print(bad_class_count)
-
-N = 50
-bb_list = bb_list[:N]
-cls_list = cls_list[:N]
-img_list = img_list[:N]
-img_path_list = img_path_list[:N]
-img_dim_list = []
-
-image_input = torch.tensor(np.stack(img_list)).cuda()
-image_input -= image_mean[:, None, None]
-image_input /= image_std[:, None, None]
-
-tokenizer = SimpleTokenizer()
-text_tokens = [tokenizer.encode(desc) for desc in cls_list]
-
-text_input = torch.zeros(len(text_tokens), model_modded.context_length, dtype=torch.long)
-sot_token = tokenizer.encoder['<|startoftext|>']
-eot_token = tokenizer.encoder['<|endoftext|>']
-
-for i, tokens in enumerate(text_tokens):
-    tokens = [sot_token] + tokens + [eot_token]
-    text_input[i, :len(tokens)] = torch.tensor(tokens)
-
-text_input = text_input.cuda()
-
-print(image_input.shape)
-print(text_input.shape)
-
-# image_input = image_input.to(device)
-# text_input = text_input.to(device)
-
-with torch.no_grad():
-    image_features = model_modded.encode_image(image_input).float()
-    text_features = model_modded.encode_text(text_input).float()
-
-inference_time = time.time()
-print('inference complete: {} seconds'.format(inference_time - load_time))
-
-img_fts = image_features[1:]
-print(img_fts.size())
-
-heatmap_list = img_fts_to_heatmap(img_fts, text_features)
-pred_bboxes = []
-for h in range(len(heatmap_list)):
-    title = "Image " + str(h) + ", Text: \"" + cls_list[h] + "\""
-    heat = heatmap_list[h]
-    bboxes = heat2bbox(heat, input_resolution)
-    print(bboxes)
-    pred_bboxes.append([torch.tensor(b['bbox_normalized']).unsqueeze(0) for b in bboxes])
-    #img_heat_bbox_disp(img_list[h].permute(1, 2, 0), heat, title=title, bboxes=bboxes, order='xyxy') 
-
-print(len(pred_bboxes))
-print(len(bb_list))
-
-# resize pred_bboxes to gt image width and height
-W = 720
-H = 405
-for i in range(len(pred_bboxes)):
-    for j in range(len(pred_bboxes[i])):
-        
-        bbox_norm = pred_bboxes[i][j][0]
-        pred_bboxes[i][j][0] = torch.tensor([int(bbox_norm[0]*W),int(bbox_norm[1]*H),int(bbox_norm[2]*W),int(bbox_norm[3]*H),])
-
-bb_list = [torch.tensor(b).unsqueeze(0) for b in bb_list]
-print(len(pred_bboxes))
-
-# average iou over all images
-iou_list = []
-for i in range(len(bb_list)):
-    j = jaccard(bb_list[i], pred_bboxes[i])
-    iou_list.append(j.squeeze(0))
-
-iou_list = torch.tensor(iou_list)
-avg = torch.mean(iou_list)
-print(avg)
-
-# average modified iou over all images
-mod_iou_list = []
-for i in range(len(bb_list)):
-    j = mod_jaccard(bb_list[i], pred_bboxes[i])
-    mod_iou_list.append(j.squeeze(0))
-
-mod_iou_list = torch.tensor(mod_iou_list)
-mod_avg = torch.mean(mod_iou_list)
-print(mod_avg)
-
-end_time = time.time()
-print('program complete: {} seconds'.format(end_time - start_time))
-
+print('job complete: {} seconds'.format(load_time - start_time))
 
 """"
 plt.figure(figsize=(16, 5))
@@ -667,3 +649,7 @@ for i in range(10):
         im.show()
 """
 # VIDSITU TEST
+
+# close all files
+f.close()
+outfile.close()

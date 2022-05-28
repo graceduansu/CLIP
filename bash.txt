@@ -1,5 +1,7 @@
 CUDA_VISIBLE_DEVICES=1 python test_clip_bbox.py
+CUDA_VISIBLE_DEVICES=3 python test_clip_bbox.py --run-name beans --num-segs 50 --k 3 --job-start 0 
 
+--------------------------------------------------------------------------
 (clip_edited) grace@melon:/dvmm-filer2/users/grace/CLIP$ CUDA_VISIBLE_DEVICES=2 python test_clip_bbox.py 
 Torch version: 1.7.1+cu101
 cuda
